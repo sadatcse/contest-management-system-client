@@ -67,7 +67,7 @@ import Myparticipate from './components/Page/Dashboard/User/MyParticipatedContes
 import Addcontest from './components/Page/Dashboard/Creator/AddContest';
 import Submitcontest from './components/Page/Dashboard/Creator/ContestSubmittedPage';
 import Mycreate from './components/Page/Dashboard/Creator/MyCreatedContest';
-import Payment from './components/Page/Dashboard/Payment/Payment';
+
 
 const router = createBrowserRouter([
   {
@@ -170,10 +170,7 @@ const router = createBrowserRouter([
         loader: () => fetch('https://contest-management-system-server-side-59zud4peg.vercel.app/statistics/admin') 
         
       },  
-      {
-        path: 'payment',
-        element: <Payment></Payment>
-      },
+
 
     ]
   },
