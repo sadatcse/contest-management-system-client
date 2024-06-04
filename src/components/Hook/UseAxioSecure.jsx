@@ -1,6 +1,6 @@
 import axios from 'axios';
 export const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000/'
+    baseURL: 'https://contest-management-system-server-side-59zud4peg.vercel.app/'
 })
 const UseAxioSecure = () => {
     return axiosSecure;

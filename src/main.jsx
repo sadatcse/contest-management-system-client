@@ -83,7 +83,7 @@ const router = createBrowserRouter([
       {
         path:'/contest',
         element:<Contest></Contest>,
-        loader: () => fetch('http://localhost:5000/contest/get-status/confirmed') 
+        loader: () => fetch('https://contest-management-system-server-side-59zud4peg.vercel.app/contest/get-status/confirmed') 
       },
       
       {
@@ -103,13 +103,13 @@ const router = createBrowserRouter([
       {
         path: '/details/:id',
         element: <DetailsPage></DetailsPage>,    //private 
-        loader: ({ params }) => fetch(`http://localhost:5000/contest/get-id/${params.id}`)
+        loader: ({ params }) => fetch(`https://contest-management-system-server-side-59zud4peg.vercel.app/contest/get-id/${params.id}`)
       },
 
       {
         path: '/registration/:id',
         element: <Registration></Registration> ,
-        loader: ({ params }) => fetch(`http://localhost:5000/contest/get-id/${params.id}`)   //private 
+        loader: ({ params }) => fetch(`https://contest-management-system-server-side-59zud4peg.vercel.app/contest/get-id/${params.id}`)   //private 
       }
        
     ]
@@ -167,7 +167,7 @@ const router = createBrowserRouter([
       {
         path:'adminhome',
         element:<PrivateRoot><Adminhome></Adminhome></PrivateRoot>,
-        loader: () => fetch('http://localhost:5000/statistics/admin') 
+        loader: () => fetch('https://contest-management-system-server-side-59zud4peg.vercel.app/statistics/admin') 
         
       },  
       {
