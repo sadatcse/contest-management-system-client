@@ -67,6 +67,7 @@ import Myparticipate from './components/Page/Dashboard/User/MyParticipatedContes
 import Addcontest from './components/Page/Dashboard/Creator/AddContest';
 import Submitcontest from './components/Page/Dashboard/Creator/ContestSubmittedPage';
 import Mycreate from './components/Page/Dashboard/Creator/MyCreatedContest';
+import Payment from './components/Page/Dashboard/Payment/Payment';
 
 const router = createBrowserRouter([
   {
@@ -82,7 +83,7 @@ const router = createBrowserRouter([
       {
         path:'/contest',
         element:<Contest></Contest>,
-        loader: () => fetch('http://localhost:5000/contest/get-status/pending') //update after dashboard work completes
+        loader: () => fetch('http://localhost:5000/contest/get-status/confirmed') 
       },
       
       {
@@ -100,13 +101,15 @@ const router = createBrowserRouter([
       },
       
       {
-        path: '/details',
-        element: <DetailsPage></DetailsPage>    //private 
+        path: '/details/:id',
+        element: <DetailsPage></DetailsPage>,    //private 
+        loader: ({ params }) => fetch(`http://localhost:5000/contest/get-id/${params.id}`)
       },
 
       {
-        path: '/registration',
-        element: <Registration></Registration>    //private 
+        path: '/registration/:id',
+        element: <Registration></Registration> ,
+        loader: ({ params }) => fetch(`http://localhost:5000/contest/get-id/${params.id}`)   //private 
       }
        
     ]
@@ -167,6 +170,10 @@ const router = createBrowserRouter([
         loader: () => fetch('http://localhost:5000/statistics/admin') 
         
       },  
+      {
+        path: 'payment',
+        element: <Payment></Payment>
+      },
 
     ]
   },

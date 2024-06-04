@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Allcontests = () => {
     const contestdata = useLoaderData();
@@ -33,12 +33,10 @@ const Allcontests = () => {
                             <h2 className="card-title">{contest.contest_name}</h2>
                             <p>{contest.contest_description.slice(0, 50)}...</p>
                             <div className="card-actions justify-end">
-                            <button 
-  onClick={() => handleDetailsClick(contest._id)} 
-  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
->
+                        <Link to={`/details/${contest._id}`}>                           <button 
+ className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
   Details
-</button>
+</button></Link>
                             </div>
                         </div>
                     </div>
