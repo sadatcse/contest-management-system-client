@@ -66,7 +66,7 @@ return colors[Math.floor(Math.random() * colors.length)];
 
     try {
       const response = await fetch(
-        "https://contest-management-system-server-side-59zud4peg.vercel.app/contest/post",
+        "http://localhost:5000/contest/post",
         {
           method: "POST",
           headers: {

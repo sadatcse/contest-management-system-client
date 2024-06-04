@@ -39,7 +39,7 @@ const Registration = () => {
       
         try {
           const response = await fetch(
-            "https://contest-management-system-server-side-59zud4peg.vercel.app/userole/post",
+            "http://localhost:5000/userole/post",
             {
               method: "POST",
               headers: {
