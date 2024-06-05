@@ -1,27 +1,44 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../Hook/UseAxioSecure";
 
 const Fivecontest = () => {
-    return (
-        <div>
-            <p>
-            This is a popular contest section show ( minimum 5 contests) (
-popular filter by user participation count). For every popular
-contest show the following properties:
-a. Contest Name
-b. Image but design thinking unique
-c. Attempted count/ participation count ( participants count and
-is it will be the summation of participants )
-d. Details button ( when clicking the details redirects to the
-details page )
-e. Contest short Description ( use slice or …)
-Note: When a user is not logged in and if he/ she clicks on the
-View Details button, redirect him/
-her to the login page. Without a login, you can not visit the
-single contests details page.
-The section will have a Show All button that will redirect you
-to the All Contests page ( /all-contests Route ).
-            </p>
+    const axiosSecure = useAxiosSecure();
+    const { data: ContestsData = [], isLoading, isError, refetch } = useQuery({
+        queryKey: ['contests'],
+        queryFn: async () => {
+            try {
+                const res = await axiosSecure.get('/contest/get-all');
+                return res.data;
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
+    });
+
+    const sortedContests = ContestsData.sort((a, b) => b.attemptedCount - a.attemptedCount).slice(0, 6);
+
+    return ( <div className='mt-5 mb-5'>
+    <div className="grid grid-cols-3 gap-1">
+            {sortedContests.map(contest => (
+                <div className="card w-96 bg-base-100 shadow-xl mb-5" key={contest._id}>
+                    <figure><img src={contest.contest_image} alt={contest.contest_name} /></figure>
+                    <div className="card-body">
+                        <h2 className="card-title">{contest.contest_name}</h2>
+                        <p>Attempted Count: {contest.attemptedCount}</p>
+                        <p>Description: {contest.contest_description.slice(0, 100)}...</p>
+                        <div className="card-actions justify-end">
+                            <Link to={`/details/${contest._id}`} className="btn btn-primary">Details</Link>
+                        </div>
+                    </div>
+                </div>
+            ))}
+          
         </div>
+        <Link to="/contest" className="btn btn-primary mt-5 mb-5">Show All</Link>
+    </div>
+    
     );
 };
 

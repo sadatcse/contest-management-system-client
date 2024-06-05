@@ -7,6 +7,7 @@ import {
   FaEye, 
   FaTruck, 
   FaHome, 
+ FaInfoCircle,
   FaUser 
 } from 'react-icons/fa';
 import { AuthContext } from '../../providers/AuthProvider';
@@ -134,6 +135,7 @@ const Dashboard = () => {
       <header className="bg-gray-800 text-white py-4 flex justify-center items-center">
         <img src={companyLogo} alt="Company Logo" className="h-12 mr-4" />
       </header>
+      
 
       <div className='flex flex-1'>
         <div className='w-64 min-h-full bg-gradient-to-b from-orange-400 to-orange-600 p-4'>
@@ -141,11 +143,31 @@ const Dashboard = () => {
 
           </div>
           <ul className='menu'>
-
             {dashboardOptions}
-            <li><NavLink to="/dashboard/profile" className="flex items-center py-2 px-4 text-white hover:bg-orange-500"><FaUser className="mr-2" /> My Profile</NavLink></li>
-            <li><NavLink to="/" onClick={handleLogOut} className="flex items-center py-2 px-4 text-white hover:bg-orange-500"><FaUser className="mr-2" /> Logout</NavLink></li>
-
+            <li>
+              <NavLink to="/dashboard/profile" className="flex items-center py-2 px-4 text-white hover:bg-orange-500">
+                <FaUser className="mr-2" /> My Profile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/" onClick={handleLogOut} className="flex items-center py-2 px-4 text-white hover:bg-orange-500">
+                <FaUser className="mr-2" /> Logout
+              </NavLink>
+            </li>
+            <hr className="my-4 border-gray-300" />
+            <div className="text-white text-lg font-bold mb-2 text-center">
+              Website Pages
+            </div>
+            <li>
+              <NavLink to="/" className="flex items-center py-2 px-4 text-white hover:bg-orange-500">
+                <FaHome className="mr-2" /> Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/about" className="flex items-center py-2 px-4 text-white hover:bg-orange-500">
+                <FaInfoCircle className="mr-2" /> About
+              </NavLink>
+            </li>
           </ul>
         </div>
         <div className='flex-1 p-4'>

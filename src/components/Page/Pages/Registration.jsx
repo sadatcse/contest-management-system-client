@@ -14,6 +14,7 @@ const Registration = () => {
         transactionId: generateTransactionId(),
         name: user?.displayName,
         email: user?.email,
+        submit:"",
     });
 
     const initialFormData = {
@@ -33,6 +34,7 @@ const Registration = () => {
       };
 
       const handleSubmit = async (e) => {
+        initialFormData.inputlink=paymentDetails.submit;
         e.preventDefault();
          const response = await axiosSecure.put(`/contest/update-inital/${contest._id}`)
         console.log(initialFormData);
@@ -148,6 +150,15 @@ const Registration = () => {
                         value={paymentDetails.transactionId}
                         onChange={handleInputChange}
                         placeholder="Enter Transaction ID"
+                        className="border border-gray-400 rounded-lg p-2 mb-4 w-full"
+                    />
+
+<input
+                        type="text"
+                        name="submit"
+                        value={paymentDetails.submit}
+                        onChange={handleInputChange}
+                        placeholder="Enter Your Submit Link"
                         className="border border-gray-400 rounded-lg p-2 mb-4 w-full"
                     />
                     <div className="flex justify-between">

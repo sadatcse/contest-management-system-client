@@ -6,7 +6,8 @@ import { Typewriter } from 'react-simple-typewriter';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Helmet } from 'react-helmet-async';
-
+import moment from 'moment';
+import CountdownTimer from './Compon/CountdownTimer';
 const DetailsPage = () => {
   const { id } = useParams();
   const contest = useLoaderData();
@@ -41,7 +42,7 @@ const DetailsPage = () => {
             <p className="text-lg text-gray-700 mb-4">Contest type: {contest.contest_type}</p>
             <p className="text-lg text-gray-700 mb-4">Registration Price: ${contest.contest_price}</p>
             <p className="text-lg text-gray-700 mb-4">Created Date: {contest.created_at}</p>
-            <p className="text-lg text-gray-700 mb-4">Last Submission Date: {contest.deadline} </p>
+            <p className="text-lg text-gray-700 mb-4">Last Submission Date: {moment(contest.deadline).format('MMMM Do YYYY')} </p>
             <p className="text-lg text-gray-700 mb-4">Contest Created: {contest.creator_name}</p>
             <p className="text-lg text-gray-700 mb-4">Contest Creator Email: {contest.creator_email}</p>
             <p className="text-lg text-gray-700 mb-4">Submission Instruction: {contest.Task_submission_instruction}</p>
@@ -52,11 +53,13 @@ const DetailsPage = () => {
           </div>
           {/* Right side with image */}
           <div className="md:w-1/3">
+          <CountdownTimer deadline={contest.deadline} />
             <img
               src={contest.contest_image}
               alt={contest.contest_name}
               className="w-full h-auto"
             />
+           
           </div>
         </div>
       </div>

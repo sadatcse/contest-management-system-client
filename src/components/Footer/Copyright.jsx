@@ -10,7 +10,7 @@ const Copyright = () => {
         <div className="footer items-center p-4 bg-neutral text-neutral-content ">
         <aside className="items-center grid-flow-col">
         <PiCopyrightFill size={30}></PiCopyrightFill>
-          <p className='text-xl font-bold'>Copyright © 2022-{moment().format('YYYY')} Sadat Fast Courier , All rights reserved. </p>
+          <p className='text-xl font-bold'>Copyright © 2022-{moment().format('YYYY')}Contest plc , All rights reserved. </p>
         </aside> 
         <div className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
         <TiSocialFacebookCircular size={30}></TiSocialFacebookCircular>

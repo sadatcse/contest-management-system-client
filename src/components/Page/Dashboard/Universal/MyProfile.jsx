@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../../Hook/useAxiosPublic';
 import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2';
+import useAdmin from '../../../Hook/useAdmin';
 function MyProfile() {
 
   const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -15,7 +16,27 @@ function MyProfile() {
   const [formData, setFormData] = useState('');
   const [users, setusers] = useState([]);
   const axiosPublic = useAxiosPublic();
+
   const [imageurl, setimageurl] = useState();
+  const { userType, loading: adminLoading } = useAdmin();
+  const userRole = userType;
+
+  const { data: contestsData = [], isLoading, isError, refetch } = useQuery({
+    queryKey: ['contests'],
+    queryFn: async () => {
+        try {
+            const res = await axiosPublic.get(`/userole/stat/${email}`);
+            return res.data;
+        } catch (error) {
+            throw new Error(error);
+        }
+    },
+
+});
+const totalRegistrations = contestsData.registration || 1; 
+const total =(contestsData.registration+contestsData.win);
+
+const completionPercentage = (contestsData.win / total) * 100;
 
   useEffect(() => {
 
@@ -106,6 +127,19 @@ function MyProfile() {
         <div className="flex items-center mb-4">
           <h1 className="text-2xl font-bold">User Profile Area</h1>
         </div>
+        {userRole === 2 && (
+          <div className="flex flex-col items-center justify-center p-4 bg-gray-100 rounded-lg shadow-md">
+            <h2 className="text-xl font-bold mb-4">Profile Completion</h2>
+            <div className="w-full bg-gray-300 rounded-full h-6">
+              <div
+                className="bg-green-500 h-6 rounded-full text-center text-white"
+                style={{ width: `${completionPercentage}%` }}
+              >
+                {completionPercentage.toFixed(0)}%
+              </div>
+            </div>
+          </div>
+        )}
         <hr className="my-4 border-2 border-gray-300" />
         <div>
           <form onSubmit={handleUpdate}>
